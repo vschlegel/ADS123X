@@ -18,7 +18,7 @@
 #define ADS1234
 //============================================================
 
-typedef enum ERROR_t {
+enum ERROR_t {
 	NoERROR,
 	TIMEOUT_HIGH,     // Timeout waiting for HIGH
 	TIMEOUT_LOW,      // Timeout waiting for LOW
@@ -27,24 +27,24 @@ typedef enum ERROR_t {
 	DIVIDED_by_ZERO    
 };
 
-typedef enum Gain{
+enum Gain{
 	GAIN1 = 1,
 	GAIN2,
 	GAIN64,
 	GAIN128
 };
 
-typedef enum Speed{
+enum Speed{
 	SLOW = 0,
 	FAST
 };
 
-typedef enum Channel{
+enum Channel{
 	AIN1 = 1,
 	AIN2 = 2,
   #if defined ADS1232
 	TEMP = 3,
-  #else if defined ADS1234
+  #elif defined ADS1234
 	AIN3 = 3,
 	AIN4 = 4
   #endif
@@ -123,13 +123,13 @@ class ADS123X
 		float OFFSET[2] = {};	// used for tare weight
 		float SCALE[2] = {1,1};	// used to return weight in grams, kg, ounces, whatever
 		
-	  #else if defined ADS1234
+	  #elif defined ADS1234
 		float OFFSET[4] = {};	// used for tare weight
 		float SCALE[4] = {1,1,1,1};	// used to return weight in grams, kg, ounces, whatever
 	  #endif
 	  
-		Speed _speed ;
-		Channel lastChannel = AIN1;
+		enum Speed _speed ;
+		enum Channel lastChannel = AIN1;
 };
 
 #endif /* #ifndef ADS123X_h */
